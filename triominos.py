@@ -10,23 +10,23 @@ class Triomino:
             board_row = [' -- '] * n
             self.board.append(board_row)
 
-        self.print_board()
-
         # Set defective square
-        x = random.randint(0,n)
-        y = random.randint(0,n)
-        self.board[x][y] = ' XX '
+        x = random.randint(0,n-1)
+        y = random.randint(0,n-1)
         missingtile = (x,y)
+        self.board[x][y] = ' XX '
+        
 
-        self.print_board()
+        # self.print_board()
         self.tile()
-        self.print_board()
     
     def print_board(self):
         print('\n'.join(map(''.join, self.board)))
     
 
-    def tile(self):
+    def tile(self, upperleft: tuple, n: int):
+        self.print_board()
+        print("\n")
         board = self.board
         print ("Iteration: " + str(self.iteration))
         self.iteration+=1
@@ -34,23 +34,22 @@ class Triomino:
         text_iteration = ''
         
         if cur_iteration < 10:
-            text_iteration = '0' + str(cur_iteration)
+            text_iteration = ' 0' + str(cur_iteration) + ' '
         else:
-            text_iteration = str(cur_iteration)
+            text_iteration = ' ' + str(cur_iteration) + ' '
 
         # Basecase: If size is == 2, tile last portion
-        print("len: ", len(board[1]))
-        print("11: " , board[0][0])
-        if (len(board[1]) == 2):
-            print ("len == 2")
-            for x in range(0, 1):
-                for y in range(0, 1):
-                    print(str(x) + " " + str(y) + " " + board[x][y])
-                    if not board[x][y] == '--':
-                        board[x][y] == text_iteration
-        
+        if (len(board[0]) == 2):
+            for x in range(0, 2):
+                for y in range(0, 2):
+                    if board[x][y] == ' -- ':
+                        board[x][y] = text_iteration
+        self.print_board()
+
         # Otherwise: Split and recurse
-    
+        
+        self.merge()
+
 
 game = Triomino(2)
 
