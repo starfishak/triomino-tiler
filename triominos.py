@@ -219,15 +219,16 @@ if choice == '2':
 elif choice == '1':
     # Single Game Test
     game = Triomino(2**n)
+    time_start = time.time()
     game.tileInit()
-    game.print_pieces()
-
+    elapsed_time = time.time() - time_start
+    
     # Print Board
-    print_time_start = time.time()
-    game.print_board()
-    print_elapsed_time = time.time() - print_time_start
-    print ("Time to Print Board:", print_elapsed_time, "seconds")
-    print ("Process Complete")
+    # game.print_pieces()
+    # game.print_board()
+    
+    print("Time to Tile Board:", elapsed_time)
+    print ("Process Complete\n\n")
 
 else:
     print("That is not a choice.")
